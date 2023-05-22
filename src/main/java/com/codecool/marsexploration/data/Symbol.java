@@ -6,7 +6,9 @@ public enum Symbol {
     PIT("#"),
     MINERAL("*"),
     WATER("~"),
-    ALIEN("A");
+    ALIEN("A"),
+    UNKNOWN("?"),
+    USED_POSITION("@");
 
     private final String symbol;
 

@@ -1,7 +1,6 @@
 package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.data.*;
-import com.codecool.marsexploration.data.Map;
 import com.codecool.marsexploration.logic.ExplorationSimulator;
 
 import java.util.ArrayList;
