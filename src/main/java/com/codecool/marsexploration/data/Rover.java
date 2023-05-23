@@ -52,4 +52,13 @@ public class Rover {
     public int getSight() {return sight;}
 
     public Map<String, List<Coordinate>> getCoordinateTrackRecords() {return coordinateTrackRecords;}
+
+    public void setRoutine(Routine routine) {
+        this.routine = routine;
+    }
+    public Routine getRoutine(){return this.routine;}
+
+    public String getId() {
+        return id;
+    }
 }

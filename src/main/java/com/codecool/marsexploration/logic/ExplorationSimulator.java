@@ -17,10 +17,13 @@ public class ExplorationSimulator {
 
     //analyse scan, log for landing then loop for exploration
 
-    //exploration loop
-    //the updated context data is analysed if there is a definite outcome
-
-    // coming back
+    if(!realMap.get(input.landing().y()).get(input.landing().x()).equals(" ")){
+        context.setOutcome(Outcome.WRONG_LANDING_COORDINATES);
+    } else {
+        rover1.setRoutine(new ExploringRoutine());
+        rover1.getRoutine().move(context);
+    }
+    
 
 
 
