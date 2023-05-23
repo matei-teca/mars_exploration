@@ -2,6 +2,7 @@ package com.codecool.marsexploration;
 
 import com.codecool.marsexploration.data.*;
 import com.codecool.marsexploration.logic.ExplorationSimulator;
+import com.codecool.marsexploration.util.FileReader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,5 +20,6 @@ public class Application {
                 100,
                 "src/main/resources/exploration-1.log");
         simulator.simulate(input);
+
     }
 }

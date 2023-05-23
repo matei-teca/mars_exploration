@@ -16,4 +16,8 @@ public class ExploringRoutine implements Routine {
     public void move(Context context) {
 
     }
+
+    public void addPhase (Phase phase) {
+        phases.add(phase);
+    }
 }
