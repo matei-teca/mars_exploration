@@ -15,13 +15,16 @@ public class Rover {
     private Map<String, List<Coordinate>> coordinateTrackRecords;
     private List<List<String>> discoveredMap;
 
-    public Rover(String id, Coordinate position, int sight, Routine routine, List<Coordinate> coordinateTrackRecords) {
+    public Rover(String id, Coordinate position, int sight, Routine routine) {
         this.id = id;
         this.position = position;
         this.sight = sight;
         this.routine = routine;
-        this.coordinateTrackRecords = coordinateTrackRecords;
-        this.discoveredMap = new ArrayList<>();
+        this.coordinateTrackRecords = new HashMap<>();
+        coordinateTrackRecords.put("roverPositions", List.of(new Coordinate(position.y(), position.x())));
+        coordinateTrackRecords.put("minerals", new ArrayList<>());
+        coordinateTrackRecords.put("water", new ArrayList<>());
+        coordinateTrackRecords.put("aliens", new ArrayList<>());
     }
 
     public void initializeDiscoveredMap(int width){
