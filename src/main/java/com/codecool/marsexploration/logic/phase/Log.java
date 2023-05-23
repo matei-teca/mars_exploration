@@ -28,6 +28,7 @@ public class Log implements Phase {
                     + "EVENT outcome; "
                     + "OUTCOME " + context.getOutcome() + "\n";
         }
+
         if(existingContent == null){
             fileWriter.write(filePath, logLine);
         } else{

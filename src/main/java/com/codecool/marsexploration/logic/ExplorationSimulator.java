@@ -1,6 +1,7 @@
 package com.codecool.marsexploration.logic;
 
 import com.codecool.marsexploration.data.*;
+import com.codecool.marsexploration.logic.phase.Log;
 import com.codecool.marsexploration.logic.routine.ExploringRoutine;
 import com.codecool.marsexploration.util.FileReader;
 
@@ -25,7 +26,7 @@ public class ExplorationSimulator {
         rover1.setRoutine(new ExploringRoutine());
         rover1.getRoutine().move(context);
     }
-    
+    new Log().perform(context);
 
     }
 
