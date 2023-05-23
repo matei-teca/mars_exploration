@@ -13,7 +13,7 @@ public class AnalyzeTimeout implements Analyzer {
     @Override
     public Optional<Outcome> analyze(Context context) {
         int stepNumber = context.getStepNumber();
-        return stepNumber == 100 ? Optional.of(Outcome.TIMEOUT) : Optional.empty();
+        return stepNumber == context.getTimeout() ? Optional.of(Outcome.TIMEOUT) : Optional.empty();
     }
 
 }

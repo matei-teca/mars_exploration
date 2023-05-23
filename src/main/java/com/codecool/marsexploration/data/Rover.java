@@ -20,7 +20,7 @@ public class Rover {
         this.position = position;
         this.sight = sight;
         this.coordinateTrackRecords = new HashMap<>();
-        coordinateTrackRecords.put("roverPositions", List.of(new Coordinate(position.y(), position.x())));
+        coordinateTrackRecords.put("roverPositions", new ArrayList<>(List.of(new Coordinate(position.y(), position.x()))));
         coordinateTrackRecords.put("minerals", new ArrayList<>());
         coordinateTrackRecords.put("water", new ArrayList<>());
         coordinateTrackRecords.put("aliens", new ArrayList<>());

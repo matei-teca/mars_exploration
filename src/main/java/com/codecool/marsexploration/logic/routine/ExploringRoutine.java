@@ -24,7 +24,7 @@ public class ExploringRoutine implements Routine {
             }
         }
 
-        context.getRover().setRoutine(new ReturningRoutine());
+//        context.getRover().setRoutine(new ReturningRoutine());
     }
 
     public void addPhase (Phase phase) {

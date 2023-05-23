@@ -15,6 +15,7 @@ public class ExplorationSimulator {
 
         List<List<String>> realMap = convertMap(input.mapPath());
 
+
         Rover rover1 = new Rover("rover-1", new Coordinate(input.landing().y(), input.landing().x()), 2);
         Context context = new Context(input.timeout(),  realMap, input.landing(), rover1, input.logPath());
 
@@ -22,11 +23,19 @@ public class ExplorationSimulator {
 
     if(!realMap.get(input.landing().y()).get(input.landing().x()).equals(" ")){
         context.setOutcome(Outcome.WRONG_LANDING_COORDINATES);
+        System.out.println("WRONG_LANDING_COORDINATES");
     } else {
         rover1.setRoutine(new ExploringRoutine());
         rover1.getRoutine().move(context);
+        for(List<String> line: context.getRealMap()){
+            System.out.println(line);
+        }
+        System.out.println("\n");
+        for(List<String> line: rover1.getDiscoveredMap()){
+            System.out.println(line);
+        }
     }
-    new Log().perform(context);
+//    new Log().perform(context);
 
     }
 
@@ -35,6 +44,7 @@ public class ExplorationSimulator {
         List<List<String>> realMap = new ArrayList<>();
         FileReader fileReader = new FileReader();
                 String stringMap = fileReader.readFile(pathMap);
+
 
         StringReader stringReader = new StringReader(stringMap);
 

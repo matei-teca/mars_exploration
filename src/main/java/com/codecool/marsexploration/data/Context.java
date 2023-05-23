@@ -47,4 +47,12 @@ public class Context {
     public void setStepNumber(int stepNumber) {
         this.stepNumber = stepNumber;
     }
+
+    public Coordinate getLandingCoordinate() {
+        return landingCoordinate;
+    }
+
+    public long getTimeout() {
+        return timeout;
+    }
 }
