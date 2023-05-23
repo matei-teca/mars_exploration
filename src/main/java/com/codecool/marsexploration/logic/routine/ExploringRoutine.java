@@ -14,7 +14,17 @@ public class ExploringRoutine implements Routine {
 
     @Override
     public void move(Context context) {
+        while(context.getOutcome() == null){
+            for(Phase phase : phases){
+                try{
+                    phase.perform(context);
+                } catch (IOException e){
+                    System.out.println("Phase execution error: " + phase + " message: " + e.getMessage());
+                }
+            }
+        }
 
+        context.getRover().setRoutine(new ReturningRoutine());
     }
 
     public void addPhase (Phase phase) {

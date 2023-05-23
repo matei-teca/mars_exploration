@@ -35,4 +35,16 @@ public class Context {
     public int getStepNumber() {
         return stepNumber;
     }
+
+    public Outcome getOutcome() {
+        return outcome;
+    }
+
+    public String getLogFile() {
+        return logFile;
+    }
+
+    public void setStepNumber(int stepNumber) {
+        this.stepNumber = stepNumber;
+    }
 }
