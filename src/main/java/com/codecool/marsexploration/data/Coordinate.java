@@ -1,4 +1,4 @@
 package com.codecool.marsexploration.data;
 
-public record Coordinate(int x, int y) {
+public record Coordinate(int y, int x) {
 }

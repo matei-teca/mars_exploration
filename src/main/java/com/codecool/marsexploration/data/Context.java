@@ -20,11 +20,17 @@ public class Context {
         this.rover = rover;
         this.outcome = null;
         this.logFile = logFile;
+        rover.initializeDiscoveredMap(realMap.size());
     }
 
     public Rover getRover() {
         return rover;
     }
+
+    public List<List<String>> getRealMap() {return realMap;}
+
+    public void setOutcome(Outcome outcome) { this.outcome = outcome;}
+
 
     public int getStepNumber() {
         return stepNumber;
