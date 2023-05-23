@@ -20,6 +20,7 @@ public class Analyze implements Phase, Analyzer {
         return Optional.of(stepNumber == 100 ? Outcome.TIMEOUT :
                 countMineral == 4 && countWater == 3 ?
                         Outcome.COLONIZABLE :
+                        countAliens > 0 ? Outcome.NOT_COLONIZABLE_ALIENS :
                         Outcome.NOT_COLONIZABLE_RESOURCES);
     }
 
