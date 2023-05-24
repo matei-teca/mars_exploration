@@ -27,19 +27,20 @@ public class Log implements Phase {
         String logLine =  "STEP " + context.getStepNumber() + "; "
                 + "EVENT position" + "; "
                 + "UNIT " + rover.getId()
-                + "POSITION [" + rover.getPosition().y() + ", " + rover.getPosition().x() + "]\n";
+                + "; POSITION [" + rover.getPosition().y() + ", " + rover.getPosition().x() + "]\n";
         if(context.getOutcome() != null){
-            logLine = "STEP " + context.getStepNumber() + "; "
+            String outcomeLine = "STEP " + context.getStepNumber() + "; "
                     + "EVENT outcome; "
                     + "OUTCOME " + context.getOutcome() + "\n";
+            logLine += outcomeLine;
         }
-        System.out.println(logLine);
+//        System.out.println(logLine);
 
-//        if(existingContent == null){
-//            fileWriter.write(filePath, logLine);
-//        } else{
-//            fileWriter.write(filePath, existingContent+logLine);
-//        }
+        if(existingContent == null){
+            fileWriter.write(filePath, logLine);
+        } else{
+            fileWriter.write(filePath, existingContent+logLine);
+        }
 
     }
 }

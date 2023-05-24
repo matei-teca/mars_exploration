@@ -23,6 +23,7 @@ public class ExplorationSimulator {
 
     if(!realMap.get(input.landing().y()).get(input.landing().x()).equals(" ")){
         context.setOutcome(Outcome.WRONG_LANDING_COORDINATES);
+        new Log().perform(context);
         System.out.println("WRONG_LANDING_COORDINATES");
     } else {
         rover1.setRoutine(new ExploringRoutine());
@@ -35,7 +36,6 @@ public class ExplorationSimulator {
             System.out.println(line);
         }
     }
-//    new Log().perform(context);
 
     }
 

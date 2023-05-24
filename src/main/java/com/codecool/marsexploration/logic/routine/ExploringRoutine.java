@@ -14,6 +14,7 @@ public class ExploringRoutine implements Routine {
 
     @Override
     public void move(Context context) {
+        new Scan().perform(context);
         while(context.getOutcome() == null){
             for(Phase phase : phases){
                 try{
@@ -24,7 +25,8 @@ public class ExploringRoutine implements Routine {
             }
         }
 
-//        context.getRover().setRoutine(new ReturningRoutine());
+        context.getRover().setRoutine(new ReturningRoutine());
+        context.getRover().getRoutine().move(context);
     }
 
     public void addPhase (Phase phase) {
