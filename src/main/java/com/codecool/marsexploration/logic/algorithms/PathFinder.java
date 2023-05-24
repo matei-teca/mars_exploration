@@ -93,6 +93,7 @@ public class PathFinder {
         }
         int SIGHT = rover.getSight();
         int rows = map.size();
+        System.out.println(rows);
         int cols = map.get(0).size();
 
 
@@ -132,7 +133,7 @@ public class PathFinder {
                 int newX = x + directions[1];
 
                 // Check if the neighboring cell is valid and not visited
-                if (newX >= SIGHT && newX < rows - SIGHT && newY >= SIGHT && newY < cols - SIGHT && !trackedSpaces[newY][newX] && (map.get(newY).get(newX).equals(PAST_WALKED_SPACE) || map.get(newY).get(newX).equals(FREE_SPACE) || map.get(newY).get(newX).equals(symbol))) {
+                if ( newY > 0 && newX > 0 && newY< cols && newX < cols && !trackedSpaces[newY][newX] && (map.get(newY).get(newX).equals(PAST_WALKED_SPACE) || map.get(newY).get(newX).equals(FREE_SPACE) || map.get(newY).get(newX).equals(symbol))) {
                     coordinatesToCheck.add(new Coordinate(newY,newX));
                     trackedSpaces[newY][newX] = true;
                     previousCoordinatesOnMatrix[newY][newX] = new Coordinate(y, x);
@@ -147,12 +148,25 @@ public class PathFinder {
         List<Coordinate> shortestPath = new ArrayList<>();
         Coordinate coordinateToAdd = new Coordinate(end.y(), end.x());
 
-        while (coordinateToAdd != null) {
+        while (coordinateToAdd != null ) {
             shortestPath.add(new Coordinate(coordinateToAdd.y(), coordinateToAdd.x()));
             coordinateToAdd = previousCoordinatesOnMatrix[coordinateToAdd.y()][coordinateToAdd.x()];
         }
 
+
+
         Collections.reverse(shortestPath);
+
+        for(int i = 0;i< shortestPath.size(); i++){
+
+            Coordinate coord = shortestPath.get(i);
+            if(coord.y()<SIGHT || coord.x()<SIGHT || coord.y()>= (rows-SIGHT) || coord.x()>= (cols - SIGHT)){
+                System.out.println(shortestPath);
+                shortestPath = shortestPath.subList(0,i-1);
+                System.out.println(shortestPath);
+                break;
+            }
+        }
 
         return shortestPath;
     }
