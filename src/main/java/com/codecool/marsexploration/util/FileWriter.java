@@ -13,6 +13,5 @@ public class FileWriter {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
     }
 }

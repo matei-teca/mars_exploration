@@ -1,6 +1,8 @@
 package com.codecool.marsexploration.data;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Context {
 
@@ -11,6 +13,7 @@ public class Context {
     private Rover rover;
     private Outcome outcome;
     private String logFile;
+    private Queue<Coordinate> exploringPath;
 
     public Context(long timeout, List<List<String>> realMap, Coordinate landingCoordinate, Rover rover, String logFile) {
         this.stepNumber = 0;
@@ -20,6 +23,7 @@ public class Context {
         this.rover = rover;
         this.outcome = null;
         this.logFile = logFile;
+        this.exploringPath = new LinkedList<>();
         rover.initializeDiscoveredMap(realMap.size());
     }
 
@@ -54,5 +58,13 @@ public class Context {
 
     public long getTimeout() {
         return timeout;
+    }
+
+    public Queue<Coordinate> getExploringPath() {
+        return exploringPath;
+    }
+
+    public void addToExploringPath(Coordinate position){
+        exploringPath.add(position);
     }
 }
