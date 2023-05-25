@@ -26,9 +26,7 @@ public class Application {
 
         MapCreator mapCreator = new MapCreator(newMap);
         mapCreator.drawMap();
-        String filePath = "src/main/resources/exploration" + "-" +
-            now.toString().replaceAll(":", "-").replaceAll("\\.","-")
-            + ".log";
+        String filePath = mapCreator.getFilePath() + ".log";
 
 
         ExplorationSimulator simulator = new ExplorationSimulator();

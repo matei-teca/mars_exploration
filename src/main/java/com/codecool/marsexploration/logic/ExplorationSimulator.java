@@ -50,7 +50,7 @@ public class ExplorationSimulator {
 
         List<List<String>> realMap = new ArrayList<>();
         FileReader fileReader = new FileReader();
-                String stringMap = fileReader.readFile(pathMap);
+        String stringMap = fileReader.readFile(pathMap + ".map");
 
 
         StringReader stringReader = new StringReader(stringMap);

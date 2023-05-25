@@ -49,9 +49,9 @@ public class MapCreator {
         LocalDateTime now = LocalDateTime.now();
         filePath = "src/main/resources/" + fileName + "-" +
                 now.toString().replaceAll(":", "-").replaceAll("\\.","-")
-                + ".txt";
+                ;
         try {
-            Files.writeString(Paths.get(filePath), content, StandardCharsets.UTF_8);
+            Files.writeString(Paths.get(filePath+ ".map"), content, StandardCharsets.UTF_8);
             System.out.println("File saved successfully!");
         } catch (IOException e) {
             System.out.println("An error occurred while saving the file.");
