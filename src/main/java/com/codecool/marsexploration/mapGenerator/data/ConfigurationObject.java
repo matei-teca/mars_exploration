@@ -12,6 +12,10 @@ public class ConfigurationObject {
     private Map<Element, Integer> elements;
     private List<Region> mountainsRegions;
     private List<Region> pitsRegions;
+
+
+
+    private int numberOfAliens = 2;
     private String fullMap;
 
     public ConfigurationObject(String fileName, int mapWidth, Map<Element, Integer> elements) {
@@ -33,6 +37,9 @@ public class ConfigurationObject {
         return mapWidth;
     }
     public String getFileName(){return fileName;}
+    public int getNumberOfAliens() {
+        return numberOfAliens;
+    }
 
 
     public boolean validate() {

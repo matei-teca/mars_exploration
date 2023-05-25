@@ -16,7 +16,7 @@ public class Context {
     private Queue<Coordinate> exploringPath;
     private boolean keepExploring;
 
-    private boolean alienSpotted =false;
+    private boolean alienSpotted = false;
 
     public Context(long timeout, List<List<String>> realMap, Coordinate landingCoordinate, Rover rover, String logFile) {
         this.stepNumber = 0;

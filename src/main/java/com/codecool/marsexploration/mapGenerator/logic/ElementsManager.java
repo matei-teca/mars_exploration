@@ -14,9 +14,9 @@ public class ElementsManager {
     private final int MIN_ELEMENTS_FOR_MOUNTAINS = 9;
     private final int MAX_ELEMENTS_FOR_PITS = 7;
     private final int MIN_ELEMENTS_FOR_PITS = 4;
-    private final double MAX_ELEMENTS_FOR_MINERALS = 1.5;
-    private final double MIN_ELEMENTS_FOR_MINERALS = 0.8;
-    private final double MAX_ELEMENTS_FOR_WATER = 1.5;
+    private final double MAX_ELEMENTS_FOR_MINERALS = 1.0;
+    private final double MIN_ELEMENTS_FOR_MINERALS = 0.6;
+    private final double MAX_ELEMENTS_FOR_WATER = 0.8;
     private final double MIN_ELEMENTS_FOR_WATER = 0.5;
 
     public Map<Element, Integer> createMapElements(int mapWidth){

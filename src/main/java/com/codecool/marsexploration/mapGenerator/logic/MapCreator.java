@@ -2,6 +2,7 @@ package com.codecool.marsexploration.mapGenerator.logic;
 
 
 import com.codecool.marsexploration.mapGenerator.data.ConfigurationObject;
+import com.codecool.marsexploration.mapGenerator.data.Element;
 import com.codecool.marsexploration.mapGenerator.data.Region;
 
 import java.io.IOException;
@@ -39,6 +40,12 @@ public class MapCreator {
         }
         drawRegions(mountains, map2D);
         drawRegions(pits, map2D);
+
+        Random random = new Random();
+
+        if(Math.random() > 0.5){
+            map2D.get(random.nextInt(mapWidth)).set(random.nextInt(mapWidth), Element.ALIEN.getSymbol());
+        }
 
         fileWriter(configObj.getFileName(), convertMapToString(map2D));
 

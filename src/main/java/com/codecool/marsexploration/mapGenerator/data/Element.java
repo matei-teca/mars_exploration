@@ -4,7 +4,8 @@ public enum  Element {
     MOUNTAIN("^"),
     PIT("#"),
     MINERAL("*"),
-    WATER("~");
+    WATER("~"),
+    ALIEN("A");
 
     private final String symbol;
 

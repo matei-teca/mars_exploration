@@ -80,4 +80,8 @@ public class CreateRegions {
         return region;
     }
 
+    private void spawnAliens(){
+
+    }
+
 }

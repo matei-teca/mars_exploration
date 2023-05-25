@@ -11,8 +11,8 @@ public class AlienSpotter implements Analyzer{
     public Optional<Outcome> analyze(Context context) {
 
         if(context.isAlienSpotted()){
-            return Optional.empty();
+            return Optional.of(Outcome.NOT_COLONIZABLE_ALIENS);
         }
-        return Optional.of(Outcome.NOT_COLONIZABLE_ALIENS);
+        return Optional.empty();
     }
 }

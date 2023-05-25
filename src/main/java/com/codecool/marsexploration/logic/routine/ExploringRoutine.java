@@ -1,6 +1,7 @@
 package com.codecool.marsexploration.logic.routine;
 
 import com.codecool.marsexploration.data.Context;
+import com.codecool.marsexploration.logic.analyzer.AlienSpotter;
 import com.codecool.marsexploration.logic.phase.*;
 
 import java.io.IOException;
@@ -15,6 +16,11 @@ public class ExploringRoutine implements Routine {
     @Override
     public void move(Context context) {
         new Scan().perform(context);
+        for(Phase phase : phases){
+            if(phase instanceof AnalyzeEngine){
+                ((AnalyzeEngine) phase).addAnalyzer(new AlienSpotter());
+            }
+        }
         while(context.getOutcome() == null){
             for(Phase phase : phases){
                 try{
