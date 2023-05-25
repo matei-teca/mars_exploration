@@ -46,7 +46,7 @@ public class ExplorationSimulator {
 
     }
 
-    private List<List<String>> convertMap(String pathMap ){
+    public List<List<String>> convertMap(String pathMap){
 
         List<List<String>> realMap = new ArrayList<>();
         FileReader fileReader = new FileReader();

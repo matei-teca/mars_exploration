@@ -60,4 +60,8 @@ public class Rover {
     public String getId() {
         return id;
     }
+
+    public void setDiscoveredMap(List<List<String>> discoveredMap) {
+        this.discoveredMap = discoveredMap;
+    }
 }

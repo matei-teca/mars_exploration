@@ -161,7 +161,7 @@ public class PathFinder {
 
         Collections.reverse(shortestPath);
 
-        return shortestPath;
+        return shortestPath.subList(1, shortestPath.size());
     }
 
 }
