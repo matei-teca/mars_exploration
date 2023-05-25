@@ -15,7 +15,7 @@ public class AnalyzeSuccess implements Analyzer{
         int countMineral = rover.getCoordinateTrackRecords().get("minerals").size();
         int countWater = rover.getCoordinateTrackRecords().get("water").size();
 
-        return (countMineral >= 4 && countWater >= 3) ?
+        return (countMineral >= 40 && countWater >= 3) ?
                 Optional.of(Outcome.COLONIZABLE) : Optional.empty();
     }
 }

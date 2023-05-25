@@ -26,8 +26,12 @@ public class Movement implements Phase {
 
         Coordinate nextPosition = context.getExploringPath().poll();
 
-        rover.setPosition(new Coordinate(nextPosition.y(),nextPosition.x()));
-        rover.getDiscoveredMap().get(nextPosition.y()).set(nextPosition.x(), Symbol.USED_POSITION.getSymbol());
+        if(nextPosition == null){
+            context.stopExploring();
+        } else {
+            rover.setPosition(new Coordinate(nextPosition.y(),nextPosition.x()));
+            rover.getDiscoveredMap().get(nextPosition.y()).set(nextPosition.x(), Symbol.USED_POSITION.getSymbol());
+        }
 
     }
 }
