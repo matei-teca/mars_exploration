@@ -17,6 +17,7 @@ public class AnalyzeEngine implements Phase{
         for(Analyzer analyzer : analyzers){
             if(analyzer.analyze(context).isPresent()){
                 context.setOutcome(analyzer.analyze(context).get());
+                break;
             }
         }
     }

@@ -34,15 +34,12 @@ public class Log implements Phase {
                     + "OUTCOME " + context.getOutcome() + "\n";
             logLine += outcomeLine;
         }
-//        System.out.println(logLine);
 
         if(existingContent == null){
             fileWriter.write(filePath, logLine);
         } else{
             fileWriter.write(filePath, existingContent+logLine);
         }
-
-//        fileWriter.write("", logLine);
 
     }
 }

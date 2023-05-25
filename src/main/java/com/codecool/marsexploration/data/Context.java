@@ -68,8 +68,8 @@ public class Context {
         return exploringPath;
     }
 
-    public void addToExploringPath(Coordinate position){
-        exploringPath.add(position);
+    public void addToExploringPath(List<Coordinate> newPositions){
+        exploringPath.addAll(newPositions);
     }
 
     public void stopExploring(){

@@ -25,6 +25,7 @@ public class PathFinder {
 
         List<List<String>> map = rover.getDiscoveredMap();
         Coordinate start = rover.getPosition();
+        List<Symbol> allowedSymbols = new ArrayList<>(List.of(Symbol.USED_POSITION,Symbol.EMPTY));
 
         int rows = map.size();
         int cols = map.get(0).size();
@@ -40,7 +41,6 @@ public class PathFinder {
         trackedSpaces[start.y()][start.x()] = true;
 
         // Create a matrix to store the previous points for each cell
-
         Coordinate[][] previousCoordinatesOnMatrix = new Coordinate[rows][cols];
 
         // Perform BFS
@@ -49,20 +49,24 @@ public class PathFinder {
             int y = currentCheckedCoordinates.y();
             int x = currentCheckedCoordinates.x();
 
-            // Check if the target point is reached
-            if (x == end.x() && y == end.y()) {
-                break;
-            }
             // Explore the neighboring cells
-            for (int[] directions : new int[][]{DirectionUP, DirectionRight, DirectionUpRight, DirectionDown, DirectionDownRight, DirectionLeft ,DirectionDownLeft,   DirectionUpLeft}) {
+            for (int[] directions : new int[][]{DirectionUP, DirectionRight, DirectionUpRight,
+                    DirectionDown, DirectionDownRight, DirectionLeft ,
+                    DirectionDownLeft,   DirectionUpLeft}){
                 int newY = y + directions[0];
                 int newX = x + directions[1];
 
                 // Check if the neighboring cell is valid and not visited
-                if (newY > 0 && newX > 0 && newY< cols && newX < cols && !trackedSpaces[newY][newX] && (map.get(newY).get(newX).equals(Symbol.USED_POSITION.getSymbol()) || map.get(newY).get(newX).equals(Symbol.EMPTY.getSymbol()))) {
+                if (validCell(newY,newX,cols,trackedSpaces,map,allowedSymbols)) {
                     coordinatesToCheck.add(new Coordinate(newY, newX));
                     trackedSpaces[newY][newX] = true;
                     previousCoordinatesOnMatrix[newY][newX] = new Coordinate(y, x);
+                    // Check if the target point is reached
+
+                    if (newX == end.x() && newY == end.y()) {
+                        coordinatesToCheck.clear();
+                        break;
+                    }
                 }
             }
         }
@@ -84,18 +88,17 @@ public class PathFinder {
         return shortestPath;
     }
 
-    public static List<Coordinate> findPathToSymbol(Rover rover, String symbol){
+    public static List<Coordinate> findPathToSymbol(Rover rover, Symbol symbol){
 
         List<List<String>> map = rover.getDiscoveredMap();
         Coordinate start = rover.getPosition();
-
+        List<Symbol> allowedSymbols = new ArrayList<>(List.of(Symbol.USED_POSITION,Symbol.EMPTY));
+        allowedSymbols.add(symbol);
         int SIGHT = rover.getSight();
-        int rows = map.size();
-
-        int cols = map.get(0).size();
+        int cols = map.size();
 
         // Create a visited matrix to keep track of visited cells
-        boolean[][] trackedSpaces = new boolean[rows][cols];
+        boolean[][] trackedSpaces = new boolean[cols][cols];
 
         // Create a queue for BFS
         Queue<Coordinate> coordinatesToCheck = new LinkedList<>();
@@ -106,32 +109,32 @@ public class PathFinder {
 
         // Create a matrix to store the previous points for each cell
 
-        Coordinate[][] previousCoordinatesOnMatrix = new Coordinate[rows][cols];
+        Coordinate[][] previousCoordinatesOnMatrix = new Coordinate[cols][cols];
 
         Coordinate end = new Coordinate(-1,-1);
         // Perform BFS
         while (!coordinatesToCheck.isEmpty()) {
             Coordinate currentCheckedCoordinates = coordinatesToCheck.poll();
-
             int y = currentCheckedCoordinates.y();
             int x = currentCheckedCoordinates.x();
 
-            // Check if the target point is reached
-            if(map.get(y).get(x).equals(symbol)){
-
-                end = new Coordinate(y, x);
-                break;
-            }
             // Explore the neighboring cells
             for (int[] directions : new int[][]{DirectionUP, DirectionRight, DirectionUpRight, DirectionDown, DirectionDownRight, DirectionLeft ,DirectionDownLeft,   DirectionUpLeft}) {
                 int newY = y + directions[0];
                 int newX = x + directions[1];
 
                 // Check if the neighboring cell is valid and not visited
-                if ( newY > 0 && newX > 0 && newY< cols && newX < cols && !trackedSpaces[newY][newX] && (map.get(newY).get(newX).equals(Symbol.USED_POSITION.getSymbol()) || map.get(newY).get(newX).equals(Symbol.EMPTY.getSymbol()) || map.get(newY).get(newX).equals(symbol))) {
+                if (validCell(newY,newX,cols,trackedSpaces,map,allowedSymbols)) {
                     coordinatesToCheck.add(new Coordinate(newY,newX));
                     trackedSpaces[newY][newX] = true;
                     previousCoordinatesOnMatrix[newY][newX] = new Coordinate(y, x);
+
+                    // Check if the target point is reached
+                    if(map.get(newY).get(newX).equals(symbol.getSymbol())){
+                        end = new Coordinate(newY, newX);
+                        coordinatesToCheck.clear();
+                        break;
+                    }
                 }
             }
         }
@@ -150,7 +153,15 @@ public class PathFinder {
 
         Collections.reverse(shortestPath);
 
-        return shortestPath.subList(1, shortestPath.size());
+        return shortestPath.subList(1, shortestPath.size()-SIGHT);
     }
-
+private static boolean validCell(int newY,int newX,int cols,boolean[][] trackedSpaces,List<List<String>> map,List<Symbol>allowedSymbols){
+    if(newY >= 0 && newX >= 0 && newY< cols && newX < cols && !trackedSpaces[newY][newX]){
+        for (Symbol symbol: allowedSymbols){
+            if(map.get(newY).get(newX).equals(symbol.getSymbol())) return true;
+        }
+    }
+        return false;
 }
+}
+

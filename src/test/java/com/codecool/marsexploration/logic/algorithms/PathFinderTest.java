@@ -24,7 +24,7 @@ class PathFinderTest {
 
         testingData.getRover1().setDiscoveredMap(discoveredMap1);
         testingData.getRover1().setPosition(new Coordinate(1,1));
-        List<Coordinate> actualRoute =  PathFinder.findPathToSymbol(testingData.getRover1(), Symbol.UNKNOWN.getSymbol());
+        List<Coordinate> actualRoute =  PathFinder.findPathToSymbol(testingData.getRover1(), Symbol.UNKNOWN);
         List<Coordinate> expectedRoute= new ArrayList<>(List.of(new Coordinate(2,1),new Coordinate(3,1),new Coordinate(4,1)));
         assertEquals(expectedRoute,actualRoute);
 

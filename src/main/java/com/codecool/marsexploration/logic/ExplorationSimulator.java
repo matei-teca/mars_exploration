@@ -4,6 +4,7 @@ import com.codecool.marsexploration.data.*;
 import com.codecool.marsexploration.logic.phase.Log;
 import com.codecool.marsexploration.logic.routine.ExploringRoutine;
 import com.codecool.marsexploration.util.FileReader;
+import com.codecool.marsexploration.util.MapPrinter;
 
 import java.io.StringReader;
 import java.util.*;
@@ -28,20 +29,12 @@ public class ExplorationSimulator {
     } else {
         rover1.setRoutine(new ExploringRoutine());
         rover1.getRoutine().move(context);
-        rover1.getDiscoveredMap().get(input.landing().y()).set(input.landing().x(),"S");
-        StringBuilder lineBuilt = new StringBuilder();
 
-        for(List<String> line: context.getRealMap()){
-            System.out.println(line);
-        }
+        rover1.getDiscoveredMap().get(input.landing().y()).set(input.landing().x(),"S");
+
+        MapPrinter.printExploredMap(context.getRealMap());
         System.out.println("\n");
-        for(List<String> line: rover1.getDiscoveredMap()){
-            for(String string : line){
-                lineBuilt.append(string).append("  ");
-            }
-            lineBuilt.append("\n");
-        }
-        System.out.println(lineBuilt);
+        MapPrinter.printExploredMap(rover1.getDiscoveredMap());
     }
 
     }
