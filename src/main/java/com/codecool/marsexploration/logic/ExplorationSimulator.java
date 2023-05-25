@@ -36,7 +36,10 @@ public class ExplorationSimulator {
         }
         System.out.println("\n");
         for(List<String> line: rover1.getDiscoveredMap()){
-            System.out.println(line);
+            for(String string : line){
+                lineBuilt.append(string).append("  ");
+            }
+            lineBuilt.append("\n");
         }
         System.out.println(lineBuilt);
     }

@@ -13,9 +13,11 @@ public class Application {
     public static void main(String[] args) {
         Random random = new Random();
         LocalDateTime now = LocalDateTime.now();
-        String filePath = "src/main/resources/exploration" + "-" +
-            now.toString().replaceAll(":", "-").replaceAll("\\.","-")
-            + ".log";
+//        String filePath = "src/main/resources2/exploration" + "-" +
+//            now.toString().replaceAll(":", "-").replaceAll("\\.","-")
+//            + ".log";
+
+        String filePath = "src/main/resources/exploration";
 
         ExplorationSimulator simulator = new ExplorationSimulator();
         SimulationInput input = new SimulationInput(
