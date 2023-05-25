@@ -52,9 +52,9 @@ public class MapCreator {
                 ;
         try {
             Files.writeString(Paths.get(filePath+ ".map"), content, StandardCharsets.UTF_8);
-            System.out.println("File saved successfully!");
+            System.out.println("File saved successfully!\n");
         } catch (IOException e) {
-            System.out.println("An error occurred while saving the file.");
+            System.out.println("An error occurred while saving the file.\n");
             e.printStackTrace();
         }
     }
@@ -65,7 +65,6 @@ public class MapCreator {
 
         for(Region region : regions) {
             List<List<String>> mountainArray = region.getRegionMap();
-            System.out.println(mountainArray);
             boolean search = true;
             while (search) {
 
@@ -78,25 +77,18 @@ public class MapCreator {
                     for (int j = randomJ; j < randomJ + region.getRegionSize(); j++) {
 
                         if (!map2D.get(i).get(j).equals(" ")) {
-                            System.out.println("Not here!");
                             checkIfAreaAvailable = false;
                         }
                     }
                 }
 
                 if (checkIfAreaAvailable) {
-                    System.out.println(randomI+" "+randomJ);
                     for (int i = randomI; i < (randomI+region.getRegionSize()); i++) {
-
                         for (int j = randomJ; j < (randomJ+region.getRegionSize()); j++) {
-//                            System.out.println("*"+i);
                             map2D.get(i).set(j,mountainArray.get(i-randomI).get(j-randomJ));
                         }
 
                     }
-                    for(List<String> line :map2D){
-                        System.out.println(line);
-                    } //print map after modification
                     search = false;
                 }
 

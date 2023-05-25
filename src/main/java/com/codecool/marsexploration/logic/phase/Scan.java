@@ -32,6 +32,9 @@ public class Scan implements Phase {
                     if (!roverMap.get(i).get(j).equals(Symbol.USED_POSITION.getSymbol())) {
                         roverMap.get(i).set(j, realMap.get(i).get(j));
                     }
+                    if(realMap.get(i).get(j).equals("A")){
+                        context.anAlienWasSpotted();
+                    }
                 }
                 }
 

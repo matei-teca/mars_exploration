@@ -37,7 +37,6 @@ public class Log implements Phase {
 //        System.out.println(logLine);
 
         if(existingContent == null){
-            System.out.println("works");
             fileWriter.write(filePath, logLine);
         } else{
             fileWriter.write(filePath, existingContent+logLine);

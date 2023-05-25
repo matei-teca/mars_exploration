@@ -20,17 +20,14 @@ public class PathFinder {
     private static final String PAST_WALKED_SPACE = "o";
 
 
+    //Breadth-First Search algorithm
     public static List<Coordinate> findPathToCoordinate(Rover rover, Coordinate end) {
 
         List<List<String>> map = rover.getDiscoveredMap();
         Coordinate start = rover.getPosition();
 
-        int SIGHT = rover.getSight();
-
-
         int rows = map.size();
         int cols = map.get(0).size();
-
 
         // Create a visited matrix to keep track of visited cells
         boolean[][] trackedSpaces = new boolean[rows][cols];
@@ -62,7 +59,7 @@ public class PathFinder {
                 int newX = x + directions[1];
 
                 // Check if the neighboring cell is valid and not visited
-                if (newX >= SIGHT && newX < rows - SIGHT && newY >= SIGHT && newY < cols - SIGHT && !trackedSpaces[newY][newX] && (map.get(newY).get(newX).equals(Symbol.USED_POSITION.getSymbol()) || map.get(newY).get(newX).equals(Symbol.EMPTY.getSymbol()))) {
+                if (newY > 0 && newX > 0 && newY< cols && newX < cols && !trackedSpaces[newY][newX] && (map.get(newY).get(newX).equals(Symbol.USED_POSITION.getSymbol()) || map.get(newY).get(newX).equals(Symbol.EMPTY.getSymbol()))) {
                     coordinatesToCheck.add(new Coordinate(newY, newX));
                     trackedSpaces[newY][newX] = true;
                     previousCoordinatesOnMatrix[newY][newX] = new Coordinate(y, x);
@@ -87,21 +84,15 @@ public class PathFinder {
         return shortestPath;
     }
 
-
-
     public static List<Coordinate> findPathToSymbol(Rover rover, String symbol){
 
         List<List<String>> map = rover.getDiscoveredMap();
         Coordinate start = rover.getPosition();
 
-//        for(List<String> list: map){
-//            System.out.println(list);
-//        }
         int SIGHT = rover.getSight();
         int rows = map.size();
 
         int cols = map.get(0).size();
-
 
         // Create a visited matrix to keep track of visited cells
         boolean[][] trackedSpaces = new boolean[rows][cols];
@@ -125,14 +116,12 @@ public class PathFinder {
             int y = currentCheckedCoordinates.y();
             int x = currentCheckedCoordinates.x();
 
-
             // Check if the target point is reached
             if(map.get(y).get(x).equals(symbol)){
 
                 end = new Coordinate(y, x);
                 break;
             }
-
             // Explore the neighboring cells
             for (int[] directions : new int[][]{DirectionUP, DirectionRight, DirectionUpRight, DirectionDown, DirectionDownRight, DirectionLeft ,DirectionDownLeft,   DirectionUpLeft}) {
                 int newY = y + directions[0];

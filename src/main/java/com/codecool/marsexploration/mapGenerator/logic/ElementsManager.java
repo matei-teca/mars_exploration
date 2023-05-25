@@ -42,12 +42,11 @@ public class ElementsManager {
         elementsForMap.put(Element.PIT, pitsElements);
         elementsForMap.put(Element.MINERAL, mineralsElements);
         elementsForMap.put(Element.WATER, waterElements);
-        System.out.println(mountainElements);
-        System.out.println(pitsElements);
-        System.out.println(mineralsElements);
-        System.out.println(waterElements);
-
-//        ArrayList<String> strings = new ArrayList<>();
+        System.out.println("Generated map will contain:");
+        System.out.println(mountainElements + " mountain elements;");
+        System.out.println(pitsElements + " pit elements;");
+        System.out.println("0-" + mineralsElements + " mineral elements;");
+        System.out.println("0-" + waterElements + " water elements;\n");
 
         return elementsForMap;
     }
