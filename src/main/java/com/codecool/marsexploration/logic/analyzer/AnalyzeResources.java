@@ -12,10 +12,8 @@ public class AnalyzeResources implements Analyzer{
     @Override
     public Optional<Outcome> analyze(Context context) {
 
-        for(List<String> line : context.getRover().getDiscoveredMap() ){
-            if(line.contains(Symbol.UNKNOWN.getSymbol())){
-                return Optional.empty();
-            }
+        if(context.continueToExplore()){
+            return Optional.empty();
         }
         return Optional.of(Outcome.NOT_COLONIZABLE_RESOURCES);
     }

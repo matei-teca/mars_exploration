@@ -22,6 +22,5 @@ public class Application {
                 "src/main/resources/exploration-1.map",
                 new Coordinate(random.nextInt(2,21), random.nextInt(2, 21)), 400, filePath);
         simulator.simulate(input);
-
     }
 }

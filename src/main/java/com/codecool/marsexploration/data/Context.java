@@ -14,6 +14,7 @@ public class Context {
     private Outcome outcome;
     private String logFile;
     private Queue<Coordinate> exploringPath;
+    private boolean keepExploring;
 
     public Context(long timeout, List<List<String>> realMap, Coordinate landingCoordinate, Rover rover, String logFile) {
         this.stepNumber = 0;
@@ -25,6 +26,7 @@ public class Context {
         this.logFile = logFile;
         this.exploringPath = new LinkedList<>();
         rover.initializeDiscoveredMap(realMap.size());
+        this.keepExploring = true;
     }
 
     public Rover getRover() {
@@ -66,5 +68,13 @@ public class Context {
 
     public void addToExploringPath(Coordinate position){
         exploringPath.add(position);
+    }
+
+    public void stopExploring(){
+        this.keepExploring = false;
+    }
+
+    public boolean continueToExplore(){
+        return this.keepExploring;
     }
 }
