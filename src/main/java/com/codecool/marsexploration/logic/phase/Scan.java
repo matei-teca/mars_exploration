@@ -3,6 +3,7 @@ package com.codecool.marsexploration.logic.phase;
 import com.codecool.marsexploration.data.Context;
 import com.codecool.marsexploration.data.Coordinate;
 import com.codecool.marsexploration.data.Rover;
+import com.codecool.marsexploration.data.Symbol;
 
 import java.util.List;
 

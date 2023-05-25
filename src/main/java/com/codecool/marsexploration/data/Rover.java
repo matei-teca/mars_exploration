@@ -31,7 +31,7 @@ public class Rover {
         for(int i = 0; i < width; i++){
             this.discoveredMap.add(new ArrayList<>());
             for(int j = 0; j < width; j++){
-                this.discoveredMap.get(i).add("?");
+                this.discoveredMap.get(i).add(Symbol.UNKNOWN.getSymbol());
             }
         }
     }
