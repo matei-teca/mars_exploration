@@ -61,8 +61,8 @@ public class PathFinder {
                     coordinatesToCheck.add(new Coordinate(newY, newX));
                     trackedSpaces[newY][newX] = true;
                     previousCoordinatesOnMatrix[newY][newX] = new Coordinate(y, x);
-                    // Check if the target point is reached
 
+                    // Check if the target point is reached
                     if (newX == end.x() && newY == end.y()) {
                         coordinatesToCheck.clear();
                         break;
@@ -75,15 +75,7 @@ public class PathFinder {
             return new ArrayList<>();
         }
         // Reconstruct the shortest path
-        List<Coordinate> shortestPath = new ArrayList<>();
-        Coordinate coordinateToAdd = new Coordinate(end.y(), end.x());
-
-        while (coordinateToAdd != null) {
-            shortestPath.add(new Coordinate(coordinateToAdd.y(), coordinateToAdd.x()));
-            coordinateToAdd = previousCoordinatesOnMatrix[coordinateToAdd.y()][coordinateToAdd.x()];
-        }
-
-        Collections.reverse(shortestPath);
+        List<Coordinate> shortestPath = extractShortestPath(end,previousCoordinatesOnMatrix);
 
         return shortestPath;
     }
@@ -92,10 +84,13 @@ public class PathFinder {
 
         List<List<String>> map = rover.getDiscoveredMap();
         Coordinate start = rover.getPosition();
+
         List<Symbol> allowedSymbols = new ArrayList<>(List.of(Symbol.USED_POSITION,Symbol.EMPTY));
         allowedSymbols.add(symbol);
+
         int SIGHT = rover.getSight();
         int cols = map.size();
+        Coordinate end = new Coordinate(-1,-1);
 
         // Create a visited matrix to keep track of visited cells
         boolean[][] trackedSpaces = new boolean[cols][cols];
@@ -108,10 +103,8 @@ public class PathFinder {
         trackedSpaces[start.y()][start.x()] = true;
 
         // Create a matrix to store the previous points for each cell
-
         Coordinate[][] previousCoordinatesOnMatrix = new Coordinate[cols][cols];
 
-        Coordinate end = new Coordinate(-1,-1);
         // Perform BFS
         while (!coordinatesToCheck.isEmpty()) {
             Coordinate currentCheckedCoordinates = coordinatesToCheck.poll();
@@ -125,6 +118,7 @@ public class PathFinder {
 
                 // Check if the neighboring cell is valid and not visited
                 if (validCell(newY,newX,cols,trackedSpaces,map,allowedSymbols)) {
+
                     coordinatesToCheck.add(new Coordinate(newY,newX));
                     trackedSpaces[newY][newX] = true;
                     previousCoordinatesOnMatrix[newY][newX] = new Coordinate(y, x);
@@ -143,6 +137,22 @@ public class PathFinder {
             return new ArrayList<>();
         }
         // Reconstruct the shortest path
+        List<Coordinate> shortestPath = extractShortestPath(end,previousCoordinatesOnMatrix);
+
+        return shortestPath.subList(1, shortestPath.size()-SIGHT);
+    }
+    private static boolean validCell(int newY,int newX,int cols,boolean[][] trackedSpaces,List<List<String>> map,List<Symbol>allowedSymbols){
+
+        if(newY >= 0 && newX >= 0 && newY< cols && newX < cols && !trackedSpaces[newY][newX]){
+            for (Symbol symbol: allowedSymbols){
+                if(map.get(newY).get(newX).equals(symbol.getSymbol())) return true;
+            }
+        }
+        return false;
+    }
+
+    private static List<Coordinate> extractShortestPath (Coordinate end,Coordinate[][] previousCoordinatesOnMatrix){
+
         List<Coordinate> shortestPath = new ArrayList<>();
         Coordinate coordinateToAdd = new Coordinate(end.y(), end.x());
 
@@ -150,18 +160,8 @@ public class PathFinder {
             shortestPath.add(new Coordinate(coordinateToAdd.y(), coordinateToAdd.x()));
             coordinateToAdd = previousCoordinatesOnMatrix[coordinateToAdd.y()][coordinateToAdd.x()];
         }
-
         Collections.reverse(shortestPath);
-
-        return shortestPath.subList(1, shortestPath.size()-SIGHT);
+        return shortestPath;
     }
-private static boolean validCell(int newY,int newX,int cols,boolean[][] trackedSpaces,List<List<String>> map,List<Symbol>allowedSymbols){
-    if(newY >= 0 && newX >= 0 && newY< cols && newX < cols && !trackedSpaces[newY][newX]){
-        for (Symbol symbol: allowedSymbols){
-            if(map.get(newY).get(newX).equals(symbol.getSymbol())) return true;
-        }
-    }
-        return false;
-}
 }
 

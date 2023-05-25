@@ -22,16 +22,10 @@ public class Log implements Phase {
             existingContent = fileReader.readFile(filePath);
         }
 
-        Rover rover = context.getRover();
+        String logLine =  moveLine(context);
 
-        String logLine =  "STEP " + context.getStepNumber() + "; "
-                + "EVENT position" + "; "
-                + "UNIT " + rover.getId()
-                + "; POSITION [" + rover.getPosition().y() + ", " + rover.getPosition().x() + "]\n";
         if(context.getOutcome() != null){
-            String outcomeLine = "STEP " + context.getStepNumber() + "; "
-                    + "EVENT outcome; "
-                    + "OUTCOME " + context.getOutcome() + "\n";
+            String outcomeLine = outcomeLine(context);
             logLine += outcomeLine;
         }
 
@@ -42,4 +36,18 @@ public class Log implements Phase {
         }
 
     }
+
+    private String moveLine(Context context){
+        return "STEP " + context.getStepNumber() + "; "
+                + "EVENT position" + "; "
+                + "UNIT " + context.getRover().getId()
+                + "; POSITION [" + context.getRover().getPosition().y() + ", " + context.getRover().getPosition().x() + "]\n";
+    }
+
+    private String outcomeLine(Context context) {
+        return "STEP " + context.getStepNumber() + "; "
+                + "EVENT outcome; "
+                + "OUTCOME " + context.getOutcome() + "\n";
+    }
+
 }

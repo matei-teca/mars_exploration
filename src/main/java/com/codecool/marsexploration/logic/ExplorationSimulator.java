@@ -12,31 +12,27 @@ import java.util.*;
 public class ExplorationSimulator {
 
     public void simulate(SimulationInput input) {
-     // initialize tools
-
+        // initialize tools
         List<List<String>> realMap = convertMap(input.mapPath());
-
-
         Rover rover1 = new Rover("rover-1", new Coordinate(input.landing().y(), input.landing().x()), 2);
         Context context = new Context(input.timeout(),  realMap, input.landing(), rover1, input.logPath());
 
-    //analyse scan, log for landing then loop for exploration
+        //analyse scan, log for landing then loop for exploration
 
-    if(!realMap.get(input.landing().y()).get(input.landing().x()).equals(" ")){
-        context.setOutcome(Outcome.WRONG_LANDING_COORDINATES);
-        new Log().perform(context);
-        System.out.println("WRONG_LANDING_COORDINATES");
-    } else {
-        rover1.setRoutine(new ExploringRoutine());
-        rover1.getRoutine().move(context);
+        if(!realMap.get(input.landing().y()).get(input.landing().x()).equals(" ")){
+            context.setOutcome(Outcome.WRONG_LANDING_COORDINATES);
+            new Log().perform(context);
+            System.out.println("WRONG_LANDING_COORDINATES");
+        } else {
+            rover1.setRoutine(new ExploringRoutine());
+            rover1.getRoutine().move(context);
 
-        rover1.getDiscoveredMap().get(input.landing().y()).set(input.landing().x(),"S");
+            rover1.getDiscoveredMap().get(input.landing().y()).set(input.landing().x(),"S");
 
-        MapPrinter.printExploredMap(context.getRealMap());
-        System.out.println("\n");
-        MapPrinter.printExploredMap(rover1.getDiscoveredMap());
-    }
-
+            MapPrinter.printExploredMap(context.getRealMap());
+            System.out.println("\n");
+            MapPrinter.printExploredMap(rover1.getDiscoveredMap());
+        }
     }
 
     public List<List<String>> convertMap(String pathMap){
