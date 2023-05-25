@@ -40,10 +40,6 @@ public class Log implements Phase {
             System.out.println("works");
             fileWriter.write(filePath, logLine);
         } else{
-            System.out.println("works2");
-            System.out.println("existingContent" + existingContent);
-            System.out.println("logLine" + logLine);
-            System.out.println("filePath" + filePath);
             fileWriter.write(filePath, existingContent+logLine);
         }
 
