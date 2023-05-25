@@ -8,7 +8,7 @@ public enum Symbol {
     WATER("~"),
     ALIEN("A"),
     UNKNOWN("?"),
-    USED_POSITION("@");
+    USED_POSITION("o");
 
     private final String symbol;
 

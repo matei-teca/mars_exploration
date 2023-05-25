@@ -17,10 +17,8 @@ public class PathFinder {
 
     public static List<Coordinate> findPathToCoordinate(Rover rover, List<List<String>> map, Coordinate start, Coordinate end) {
 
-//        for (List<String> list : map) {
-//            System.out.println(list);
-//        }
-
+        List<List<String>> map = rover.getDiscoveredMap();
+        Coordinate start = rover.getPosition();
 
         int SIGHT = rover.getSight();
 
@@ -88,12 +86,12 @@ public class PathFinder {
 
     public static List<Coordinate> findPathToSymbol(Rover rover, List<List<String>> map, Coordinate start, String symbol){
 
-        for(List<String> list: map){
-            System.out.println(list);
-        }
+//        for(List<String> list: map){
+//            System.out.println(list);
+//        }
         int SIGHT = rover.getSight();
         int rows = map.size();
-        System.out.println(rows);
+
         int cols = map.get(0).size();
 
 
@@ -122,7 +120,7 @@ public class PathFinder {
 
             // Check if the target point is reached
             if(map.get(y).get(x).equals(symbol)){
-                System.out.println("end seted");
+
                 end = new Coordinate(y, x);
                 break;
             }
@@ -153,20 +151,7 @@ public class PathFinder {
             coordinateToAdd = previousCoordinatesOnMatrix[coordinateToAdd.y()][coordinateToAdd.x()];
         }
 
-
-
         Collections.reverse(shortestPath);
-
-        for(int i = 0;i< shortestPath.size(); i++){
-
-            Coordinate coord = shortestPath.get(i);
-            if(coord.y()<SIGHT || coord.x()<SIGHT || coord.y()>= (rows-SIGHT) || coord.x()>= (cols - SIGHT)){
-                System.out.println(shortestPath);
-                shortestPath = shortestPath.subList(0,i-1);
-                System.out.println(shortestPath);
-                break;
-            }
-        }
 
         return shortestPath;
     }

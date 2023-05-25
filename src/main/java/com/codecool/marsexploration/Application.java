@@ -19,8 +19,8 @@ public class Application {
 
         ExplorationSimulator simulator = new ExplorationSimulator();
         SimulationInput input = new SimulationInput(
-                "src/main/resources/exploration-2.map",
-                new Coordinate(random.nextInt(2,30), random.nextInt(2, 30)), 400, filePath);
+                "src/main/resources/exploration-1.map",
+                new Coordinate(random.nextInt(2,21), random.nextInt(2, 21)), 400, filePath);
         simulator.simulate(input);
 
     }

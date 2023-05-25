@@ -45,7 +45,7 @@ public class Context {
     }
 
     public String getLogFile() {
-        return logFile;
+        return this.logFile;
     }
 
     public void setStepNumber(int stepNumber) {

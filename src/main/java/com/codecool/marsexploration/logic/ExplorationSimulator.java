@@ -28,6 +28,9 @@ public class ExplorationSimulator {
     } else {
         rover1.setRoutine(new ExploringRoutine());
         rover1.getRoutine().move(context);
+        rover1.getDiscoveredMap().get(input.landing().y()).set(input.landing().x(),"S");
+        StringBuilder lineBuilt = new StringBuilder();
+
         for(List<String> line: context.getRealMap()){
             System.out.println(line);
         }
@@ -59,10 +62,8 @@ public class ExplorationSimulator {
                 mapLine.add(line.substring(i, i+1));
             }
             realMap.add(mapLine);
-
         }
 
-        // Close the resources
         scanner.close();
         stringReader.close();
 
