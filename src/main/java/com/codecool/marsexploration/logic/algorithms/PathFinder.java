@@ -139,7 +139,7 @@ public class PathFinder {
         // Reconstruct the shortest path
         List<Coordinate> shortestPath = extractShortestPath(end,previousCoordinatesOnMatrix);
 
-        return shortestPath.subList(1, shortestPath.size()-SIGHT);
+        return shortestPath.subList(1, shortestPath.size());
     }
     private static boolean validCell(int newY,int newX,int cols,boolean[][] trackedSpaces,List<List<String>> map,List<Symbol>allowedSymbols){
 

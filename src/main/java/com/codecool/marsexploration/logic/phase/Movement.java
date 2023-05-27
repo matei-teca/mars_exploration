@@ -16,9 +16,7 @@ public class Movement implements Phase {
     public void perform(Context context) {
         Rover rover = context.getRover();
 
-        if(isExploringForResources(context)){
         addNewTargetToDiscoverIfEmpty(context);
-        }
 
         Coordinate nextPosition = context.getExploringPath().poll();
         if(nextPosition == null){
@@ -27,23 +25,19 @@ public class Movement implements Phase {
             rover.setPosition(new Coordinate(nextPosition.y(),nextPosition.x()));
             rover.getDiscoveredMap().get(nextPosition.y()).set(nextPosition.x(), Symbol.USED_POSITION.getSymbol());
         }
+        MapPrinter.printExploredMap(rover.getDiscoveredMap());
     }
 
     private void addNewTargetToDiscoverIfEmpty(Context context){
-        Rover rover = context.getRover();
-        List<Coordinate> newExploringPath;
-
-        if(context.getExploringPath().isEmpty()){
-            MapPrinter.printExploredMap(rover.getDiscoveredMap());
-            newExploringPath = PathFinder.findPathToSymbol(rover, Symbol.UNKNOWN);
-            context.addToExploringPath(newExploringPath);
-        }
-    }
-    private boolean isExploringForResources(Context context){
         if(context.getOutcome() == null){
-            return true;
+            Rover rover = context.getRover();
+            List<Coordinate> newExploringPath;
+
+            if(context.getExploringPath().isEmpty()){
+                newExploringPath = PathFinder.findPathToSymbol(rover, Symbol.UNKNOWN);
+                context.addToExploringPath(newExploringPath);
+            }
         }
-        return false;
     }
 
 }
